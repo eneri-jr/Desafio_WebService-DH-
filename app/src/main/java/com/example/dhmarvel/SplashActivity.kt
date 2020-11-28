@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
         scope.launch {
             delay(splashTimeOut.toLong())
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
         }
     }
 }
