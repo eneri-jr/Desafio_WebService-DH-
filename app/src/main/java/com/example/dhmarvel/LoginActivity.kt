@@ -16,7 +16,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         tvRegister.setOnClickListener(){
-            //Falta criar a activity Register
+            val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 }
