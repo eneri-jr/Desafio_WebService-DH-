@@ -1,5 +1,7 @@
 package com.example.dhmarvel.entities
 
+import java.io.Serializable
+
 
 data class JsonApiMarvel(
         val data: Data
@@ -10,30 +12,38 @@ data class Data(
         val results: ArrayList<Hq>
 )
 
-class Hq(
+data class Hq(
         val id: Int,
-        val title: String,
-        val description: String,
-        val pageCount: Int,
-        val dates: ArrayList<Date>,
-        val prices: ArrayList<Price>,
+        var title: String,
+        var description: String,
+        var pageCount: Int,
+        var dates: ArrayList<Date>,
+        var prices: ArrayList<Price>,
         val images: ArrayList<Images>
-)
+): Serializable{
+
+}
 
 data class Date(
     val type: String,
     val date: String
-)
+): Serializable{
+
+}
 
 data class Price(
         val type: String,
         val price: Float
-)
+): Serializable{
+
+}
 
 data class Images(
         val path: String,
         val extension: String
-)
+): Serializable{
+
+}
 
 
 

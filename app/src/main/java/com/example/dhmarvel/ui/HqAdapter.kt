@@ -11,7 +11,7 @@ import com.example.dhmarvel.entities.Hq
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_hq.view.*
 
-class AdapterHq(): RecyclerView.Adapter<AdapterHq.HqViewHolder>() {
+class HqAdapter(val listener: OnclickHqListener): RecyclerView.Adapter<HqAdapter.HqViewHolder>() {
 
     var listHq = ArrayList<Hq>()
 
@@ -37,10 +37,24 @@ class AdapterHq(): RecyclerView.Adapter<AdapterHq.HqViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class HqViewHolder(view: View) :RecyclerView.ViewHolder(view){
+    interface OnclickHqListener{
+        fun onClickHq(position: Int)
+    }
+
+    inner class HqViewHolder(view: View) :RecyclerView.ViewHolder(view), View.OnClickListener{
 
         val ivHq: ImageView = view.ivHq
         val tvHq: TextView = view.tvHq
+
+        init{
+            view.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View){
+            val position = adapterPosition
+            if(position != RecyclerView.NO_POSITION)
+                listener.onClickHq(position)
+        }
 
     }
 }

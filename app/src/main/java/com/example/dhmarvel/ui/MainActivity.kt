@@ -1,19 +1,17 @@
 package com.example.dhmarvel.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dhmarvel.R
 import com.example.dhmarvel.service.repository
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HqAdapter.OnclickHqListener {
 
     val viewModel by viewModels<MainViewModel>{
         object: ViewModelProvider.Factory{
@@ -23,24 +21,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    lateinit var adapterHq: AdapterHq
+    lateinit var hqAdapter: HqAdapter
     lateinit var layoutManager: GridLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        adapterHq = AdapterHq()
+        hqAdapter = HqAdapter(this)
         layoutManager = GridLayoutManager(this, 3)
-        rcMain.adapter = adapterHq
+        rcMain.adapter = hqAdapter
         rcMain.layoutManager = layoutManager
         rcMain.hasFixedSize()
 
         viewModel.popListHqs()
 
         viewModel.listHqs.observe(this){
-            adapterHq.addList(it)
+            hqAdapter.addList(it)
         }
+    }
+
+    override fun onClickHq(position: Int) {
+        var hq = hqAdapter.listHq[position]
+        val intent = Intent(this@MainActivity, HqActivity::class.java).putExtra("hq", hq)
+        startActivity(intent)
     }
 
 }
