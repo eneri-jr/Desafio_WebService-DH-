@@ -1,8 +1,9 @@
-package com.example.dhmarvel
+package com.example.dhmarvel.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.dhmarvel.R
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.card_register.*
 
